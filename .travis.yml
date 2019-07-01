@@ -26,9 +26,7 @@ jobs:
         - echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
         - docker push $IMAGE
     - stage: deploy
-      deploy: &rancher
-        provider: rancher
-        app: deploy-demo
-        script: echo "test deploy111"
-        on:
-          branch: master
+      provider: script
+      script: echo "setup app!"
+      on:
+        branch: master
