@@ -1,10 +1,6 @@
 language: go
 sudo: false
 
-env:
-  - DOCKER_USER=haodiaodemingzi
-  - DOCKER_PASS=king1984td21
-  - IMAGE=haodiaodemingzi/pipelines-go:${TRAVIS_COMMIT}
 services:
   - docker
 
@@ -23,6 +19,9 @@ jobs:
     - stage: push_docker_image
       # docker run ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} /go/src/github.com/kainlite/whatismyip-go/whatismyip-go.test
       script: 
+        - export DOCKER_USER=haodiaodemingzi
+        - export DOCKER_PASS=king1984td21
+        - export IMAGE=haodiaodemingzi/pipelines-go:${TRAVIS_COMMIT}
         - echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
         - docker push $IMAGE
     - stage: deploy
