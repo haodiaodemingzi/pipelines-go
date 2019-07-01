@@ -19,6 +19,7 @@ jobs:
     - stage: push_docker_image
       # docker run ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} /go/src/github.com/kainlite/whatismyip-go/whatismyip-go.test
       script: 
+        - docker build --no-cache -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
         - export DOCKER_USER=haodiaodemingzi
         - export DOCKER_PASS=king1984td21
         - export IMAGE=haodiaodemingzi/pipelines-go:${TRAVIS_COMMIT}
