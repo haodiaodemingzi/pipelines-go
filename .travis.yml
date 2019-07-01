@@ -1,0 +1,12 @@
+language: go
+
+services:
+  - docker
+
+before_install:
+- docker build --no-cache -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
+#- docker run ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} /go/src/github.com/kainlite/whatismyip-go/whatismyip-go.test
+
+script:
+  - echo "king1984td21" | docker login -u "haodiaodemingzi" --password-stdin
+  - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
