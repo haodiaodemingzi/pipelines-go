@@ -1,12 +1,30 @@
 language: go
+sudo: false
 
 services:
   - docker
 
 before_install:
-- docker build --no-cache -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
-#- docker run ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} /go/src/github.com/kainlite/whatismyip-go/whatismyip-go.test
+  - echo "hello install"
+install:
+  - echo "install"
 
-script:
-  - echo "king1984td21" | docker login -u "haodiaodemingzi" --password-stdin
-  - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
+jobs:
+  include:
+    - stage: build
+      script: docker build --no-cache -t ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
+    - stage: test
+      # docker run ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} /go/src/github.com/kainlite/whatismyip-go/whatismyip-go.test
+      script: echo "docker test" 
+    - stage: push_docker_image
+      # docker run ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} /go/src/github.com/kainlite/whatismyip-go/whatismyip-go.test
+      script: 
+        - echo "king1984td21" | docker login -u "haodiaodemingzi" --password-stdin
+        - docker push ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}
+    - stage: deploy
+      deploy: &rancher
+        provider: rancher
+        app: deploy-demo
+        script: echo "test deploy"
+        on:
+          branch: master
