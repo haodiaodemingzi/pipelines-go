@@ -27,6 +27,7 @@ func main() {
 }
 
 // Increment function increments the entered value by 1
+// add a comment
 func Increment(x int) (result int) {
 	return x + 1
 }
