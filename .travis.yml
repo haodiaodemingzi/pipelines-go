@@ -28,6 +28,6 @@ jobs:
       deploy: &rancher
         provider: rancher
         app: deploy-demo
-        script: echo "test deploy"
+        script: echo "test deploy111"
         on:
           branch: master
