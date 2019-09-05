@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-
+    name: build demo
     runs-on: ubuntu-latest
     
     steps:
@@ -15,12 +15,9 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
-  name: CI
-
   test:
-
+    name: test demo
     runs-on: ubuntu-latest
-    
     steps:
     - name: Run a one-line script
       run: run a code test
